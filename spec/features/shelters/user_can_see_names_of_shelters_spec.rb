@@ -4,7 +4,7 @@ RSpec.describe "shelters index page", type: :feature do
   it "can see all shelter names" do
     shelter_1 = Shelter.create(name:       'Good Shelter')
 
-    shelter_2 = Shelter.create(title:       'Very Good Shelter')
+    shelter_2 = Shelter.create(name:       'Very Good Shelter')
 
     visit "/shelters"
 
