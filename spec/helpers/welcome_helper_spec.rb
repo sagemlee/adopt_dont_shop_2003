@@ -11,5 +11,8 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe WelcomeHelper, type: :helper do
+  # xvisit '/' 
+  # expect(page) has_content()
+  # expect(page) has_css('#hello')
   pending "add some examples to (or delete) #{__FILE__}"
 end
