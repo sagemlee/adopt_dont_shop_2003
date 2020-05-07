@@ -12,7 +12,5 @@ RSpec.describe "shelters id page", type: :feature do
     expect(page).to have_content(shelter_1.city)
     expect(page).to have_content(shelter_1.state)
     expect(page).to have_content(shelter_1.zipcode)
-    # visit "/shelters/2"
-    # expect(page).to have_content(shelter_2.address, shelter_2.city, shelter_2.state, shelter_2.zipcode)
   end
 end
