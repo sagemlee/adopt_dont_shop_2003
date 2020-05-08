@@ -9,12 +9,12 @@ RSpec.describe "Pet Index", type: :feature do
     pet_1 = Pet.create(image: "https://i.pinimg.com/474x/a3/37/5e/a3375edbf6512fd306b9c9d348947dc8.jpg" ,
                       name:'Walter',
                       approximate_age: 3,
-                      sex: M, current_shelter: shelter_1)
+                      sex: "M", current_shelter: shelter_1)
 
     pet_2 = Pet.create(image: 'https://bluebuffalo.com/globalassets/00-redesign/articles/lifestage-guides/adult-cat-header.jpg' ,
                        name:'Phoebe',
                        approximate_age: 7,
-                        sex: F, current_shelter: shelter_2)
+                        sex: "F", current_shelter: shelter_2)
 
 
     visit '/pets'
