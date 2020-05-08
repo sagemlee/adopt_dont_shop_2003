@@ -4,14 +4,14 @@ RSpec.describe "Shelter Delete", type: :feature do
   it "On shelter show page, click link to delete shelter, return to shelter index, see shelter missing" do
       shelter_1 = Shelter.create(name:'Good Shelter', address: '1 wagon rd.', city: 'Denver', state: 'CO', zipcode: '80207')
 
-      shelter_2 = Shelter.create(name:'Very Good Shelter', address: '32 mountain rd.', city: 'San Diego', state: 'CA', zipcode: '93567')
+      shelter_2 = Shelter.create(name:'Pets Pets Pets', address: '32 mountain rd.', city: 'San Diego', state: 'CA', zipcode: '93567')
 
       visit "shelters/#{shelter_1.id}"
       click_link("Delete Shelter")
       expect(current_path).to eq("/shelters")
 
       expect(page).to_not have_content("Good Shelter")
-      expect(page).to have_content("Very Good Shelter")
+      expect(page).to have_content("Pets Pets Pets")
 
   end
 end

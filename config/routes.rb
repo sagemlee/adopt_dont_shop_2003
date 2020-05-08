@@ -11,4 +11,6 @@ Rails.application.routes.draw do
 
   put '/shelters/:id', to: 'shelters#update'
 
+  delete '/shelters/:id', to: 'shelters#destroy'
+
 end
