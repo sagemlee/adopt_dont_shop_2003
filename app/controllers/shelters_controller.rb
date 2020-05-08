@@ -5,6 +5,7 @@ class SheltersController < ApplicationController
 
   def show
     @shelter = Shelter.find(params[:id])
+
   end
 
   def new
@@ -12,16 +13,33 @@ class SheltersController < ApplicationController
 
   def create
     new_shelter = Shelter.create(shelter_params)
-   redirect_to "/shelters"
+    redirect_to "/shelters"
   end
 
+  def edit
+  
+    @shelter_id = params[:id]
+    # @shelter_name = params[:name]
+    # @shelter_address = params[:address]
+    # @shelter_city = params[:city]
+    # @shelter_state = params[:state]
+    # @shelter_zipcode = params[:zipcode]
+  end
+
+  def update
+
+    shelter = Shelter.find(params[:id])
+    shelter.update(shelter_params)
+    # shelter.update(@shelter_address)
+    # shelter.update(@shelter_city)
+    # shelter.update(@shelter_state)
+    # shelter.update(@shelter_zipcode)
+   redirect_to "/shelters/#{shelter.id}"
+  end
   private
 
   def shelter_params
-    params.permit(:name)
-  #   params.permit(:address)
-  #   params.permit(:city)
-  #   params.permit(:state)
-  #   params.permit(:zipcode)
+    params.permit(:name, :address, :city, :state, :zipcode)
+
   end
 end

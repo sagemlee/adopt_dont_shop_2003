@@ -8,7 +8,7 @@ RSpec.describe "Shelter Update", type: :feature do
 
     shelter_2 = Shelter.create(name:'Very Good Shelter', address: '32 mountain rd.', city: 'San Diego', state: 'CA', zipcode: '93567')
 
-    visit "shelter/#{shelter_1.id}"
+    visit "shelters/#{shelter_1.id}"
     click_link("Update Shelter")
     expect(current_path).to eq("/shelters/#{shelter_1.id}/edit")
 
