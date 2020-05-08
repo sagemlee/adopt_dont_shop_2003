@@ -17,25 +17,21 @@ class SheltersController < ApplicationController
   end
 
   def edit
-  
     @shelter_id = params[:id]
-    # @shelter_name = params[:name]
-    # @shelter_address = params[:address]
-    # @shelter_city = params[:city]
-    # @shelter_state = params[:state]
-    # @shelter_zipcode = params[:zipcode]
   end
 
   def update
 
     shelter = Shelter.find(params[:id])
     shelter.update(shelter_params)
-    # shelter.update(@shelter_address)
-    # shelter.update(@shelter_city)
-    # shelter.update(@shelter_state)
-    # shelter.update(@shelter_zipcode)
    redirect_to "/shelters/#{shelter.id}"
   end
+
+  def destroy
+    Shelter.destroy(params[:id])
+   redirect_to "/shelters"
+  end
+
   private
 
   def shelter_params
