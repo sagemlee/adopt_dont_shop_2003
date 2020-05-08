@@ -1,5 +1,3 @@
-
-
 require 'rails_helper'
 
 RSpec.describe "Shelter Update", type: :feature do
