@@ -17,13 +17,13 @@ RSpec.describe "Pet Index", type: :feature do
                         sex: "F", shelter_id: shelter_2.id)
 
     visit '/pets'
-    expect(page).to have_content(pet_1.image)
+    have_css("img[src*=pet_1.image]")
     expect(page).to have_content(pet_1.name)
     expect(page).to have_content(pet_1.approximate_age)
     expect(page).to have_content(pet_1.sex)
     expect(page).to have_content(shelter_1.name)
 
-    expect(page).to have_content(pet_2.image)
+    have_css("img[src*=pet_2.image]")
     expect(page).to have_content(pet_2.name)
     expect(page).to have_content(pet_2.approximate_age)
     expect(page).to have_content(pet_2.sex)
