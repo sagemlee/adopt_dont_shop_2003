@@ -16,12 +16,22 @@ RSpec.describe "Shelter Pet Index", type: :feature do
                        approximate_age: 7,
                         sex: "F", shelter_id: shelter_2.id)
 
-    visit '/shelters/1/pets'
+    pet_3 = Pet.create(image: 'https://bluebuffalo.com/globalassets/00-redesign/articles/lifestage-guides/adult-cat-header.jpg' ,
+                       name:'Chloe',
+                       approximate_age: 10,
+                        sex: "F", shelter_id: shelter_1.id)
+
+    visit "/shelters/#{shelter_1.id}/pets"
     expect(page).to have_content(shelter_1.name)
-    expect(page).to have_content(pet_1.image)
+  
     expect(page).to have_content(pet_1.name)
     expect(page).to have_content(pet_1.approximate_age)
     expect(page).to have_content(pet_1.sex)
+
+    have_css("img[src*=pet_3.image]")
+    expect(page).to have_content(pet_3.name)
+    expect(page).to have_content(pet_3.approximate_age)
+    expect(page).to have_content(pet_3.sex)
 
     expect(page).to_not have_content(shelter_2.name)
 
