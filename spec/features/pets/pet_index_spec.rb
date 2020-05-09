@@ -9,14 +9,13 @@ RSpec.describe "Pet Index", type: :feature do
     pet_1 = Pet.create(image: "https://i.pinimg.com/474x/a3/37/5e/a3375edbf6512fd306b9c9d348947dc8.jpg" ,
                       name:'Walter',
                       approximate_age: 3,
-                      sex: "M", current_shelter_id: shelter_1.id)
+                      sex: "M", shelter_id: shelter_1.id)
 
     pet_2 = Pet.create(image: 'https://bluebuffalo.com/globalassets/00-redesign/articles/lifestage-guides/adult-cat-header.jpg' ,
                        name:'Phoebe',
                        approximate_age: 7,
-                        sex: "F", current_shelter_id: shelter_2.id)
+                        sex: "F", shelter_id: shelter_2.id)
 
-binding.pry
     visit '/pets'
     expect(page).to have_content(pet_1.image)
     expect(page).to have_content(pet_1.name)
@@ -30,8 +29,4 @@ binding.pry
     expect(page).to have_content(pet_2.sex)
     expect(page).to have_content(shelter_2.name)
   end
-
-  describe "relationships" do
-    it {should belong_to :shelter}
-  end 
 end
