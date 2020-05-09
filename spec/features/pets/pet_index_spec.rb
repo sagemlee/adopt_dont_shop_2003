@@ -16,20 +16,22 @@ RSpec.describe "Pet Index", type: :feature do
                        approximate_age: 7,
                         sex: "F", current_shelter_id: shelter_2.id)
 
-
+binding.pry
     visit '/pets'
     expect(page).to have_content(pet_1.image)
     expect(page).to have_content(pet_1.name)
     expect(page).to have_content(pet_1.approximate_age)
     expect(page).to have_content(pet_1.sex)
-    expect(page).to have_content(pet_1.current_shelter_id)
+    expect(page).to have_content(shelter_1.name)
 
     expect(page).to have_content(pet_2.image)
     expect(page).to have_content(pet_2.name)
     expect(page).to have_content(pet_2.approximate_age)
     expect(page).to have_content(pet_2.sex)
-    expect(page).to have_content(pet_2.current_shelter_id)
-
-
+    expect(page).to have_content(shelter_2.name)
   end
+
+  describe "relationships" do
+    it {should belong_to :shelter}
+  end 
 end
