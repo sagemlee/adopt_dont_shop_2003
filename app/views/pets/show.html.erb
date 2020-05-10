@@ -6,7 +6,7 @@
   <h2><%= pet.sex %></h2>
   <h2><%= pet.shelter.name %></h2>
   <h2><%= "Adoption Status: Adoptable" %></h2>
-<% elsif "#{pet.id}" == @pet_id && pet.status == false %>
+<% elsif "#{pet.id}" == @pet_id && pet.status == (false || nil) %>
   <%= image_tag(pet.image) %>
   <h2><%= pet.name %></h2>
   <h2><%= pet.approximate_age %></h2>
