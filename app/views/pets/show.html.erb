@@ -15,3 +15,5 @@
   <h2><%= "Adoption Status:Pending" %></h2>
   <% end %>
 <% end %>
+
+<%= link_to "Update Pet", {:controller => "pets", :action => "edit", :pet_id => @pet_id} %>

@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe "Pet Update", type: :feature do
   it "Can update pet info from pet show page, can see updates in pet show page" do
-
     shelter_1 = Shelter.create(name:'Good Shelter', address: '1 wagon rd.', city: 'Denver', state: 'CO', zipcode: '80207')
 
     shelter_2 = Shelter.create(name:'Pets Pets Pets', address: '32 mountain rd.', city: 'San Diego', state: 'CA', zipcode: '93567')
@@ -20,14 +19,14 @@ RSpec.describe "Pet Update", type: :feature do
     visit "/pets/#{pet_1.id}"
     click_link("Update Pet")
 
-    expect(current_path).to eq("/pets/#{pet_1.id}/edit"})
+    expect(current_path).to eq("/pets/#{pet_1.id}/edit")
     fill_in :image, with: 'https://bluebuffalo.com/globalassets/00-redesign/articles/lifestage-guides/adult-cat-header.jpg'
     fill_in :name, with: 'Chloe'
     fill_in :approximate_age, with: 10
     fill_in :sex, with: "F"
     click_button("Update Pet")
 
-    expect(current_path).to eq("/pets/#{pet_1.id})
+    expect(current_path).to eq("/pets/#{pet_1.id}")
 
     expect(page).to have_css("img[src*='https://bluebuffalo.com/globalassets/00-redesign/articles/lifestage-guides/adult-cat-header.jpg']")
     expect(page).to have_content("Chloe")
