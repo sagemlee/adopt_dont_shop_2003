@@ -1,3 +1,5 @@
+<h3><%= link_to "Click here to see all pets","/pets" %></h3>
+
 <h1>Fill in New Pet Info</h1>
 <%= form_tag "/shelters/#{@current_shelter_id}/pets", method: :post do %>
 <%= text_field_tag :image %>
