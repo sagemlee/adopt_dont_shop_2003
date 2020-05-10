@@ -4,14 +4,17 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   get '/shelters', to: 'shelters#index'
-  get '/shelters/new', to: 'shelters#new'
-  get '/shelters/:id', to: 'shelters#show'
+  delete '/shelters', to: 'shelters#destroy'
   post '/shelters', to: 'shelters#create'
+
+  get '/shelters/new', to: 'shelters#new'
+
   get '/shelters/:id/edit', to: 'shelters#edit'
+  get '/shelters/:id', to: 'shelters#show'
   put '/shelters/:id', to: 'shelters#update'
   delete '/shelters/:id', to: 'shelters#destroy'
+
   get '/pets', to: 'pets#index'
-  get '/pets/:pet_id', to: 'pets#show'
   post '/pets/:pet_id', to: 'pets#update'
   get '/pets/:pet_id/edit', to: 'pets#edit'
 
