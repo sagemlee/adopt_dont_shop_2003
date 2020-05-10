@@ -8,7 +8,7 @@
   <h2><%= link_to "#{pet.name}","/pets/#{pet.id}" %></h2>
   <h2><%= pet.approximate_age %></h2>
   <h2><%= pet.sex %></h2>
-  <h2><%= link_to "#{pet.shelter.name}","/shelters/#{pet.shelter_id}" %></h2>
+  <h3><%= link_to "#{pet.shelter.name}","/shelters/#{pet.shelter_id}" %></h3>
 
   <%= link_to "Update Pet", {:controller => "pets", :action => "edit", :pet_id => pet.id} %>
   <%= link_to "Delete Pet", "/pets/#{pet.id}", method: :delete %>
