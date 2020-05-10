@@ -1,3 +1,5 @@
+<h3><%= link_to "Click here to see all pets","/pets" %></h3>
+
 <% @pets.each do |pet| %>
 <% if "#{pet.id}" == @pet_id && pet.status == true %>
   <%= image_tag(pet.image) %>
@@ -6,7 +8,7 @@
   <h2><%= pet.sex %></h2>
   <h2><%= pet.shelter.name %></h2>
   <h2><%= "Adoption Status: Adoptable" %></h2>
-<% elsif "#{pet.id}" == @pet_id && pet.status == (false || nil) %>
+<% elsif "#{pet.id}" == @pet_id %>
   <%= image_tag(pet.image) %>
   <h2><%= pet.name %></h2>
   <h2><%= pet.approximate_age %></h2>

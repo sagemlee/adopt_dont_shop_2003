@@ -35,6 +35,7 @@ RSpec.describe "Pet Show", type: :feature do
     expect(page).to_not have_content("Pending")
 
     visit "/pets/#{pet_3.id}"
+    expect(current_path).to eq("/pets/#{pet_3.id}")
     have_css("img[src*=pet_3.image]")
     expect(page).to have_content(pet_3.name)
     expect(page).to have_content(pet_3.approximate_age)
