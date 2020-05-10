@@ -35,5 +35,9 @@ RSpec.describe "Shelter Pet Index", type: :feature do
 
     expect(page).to_not have_content(shelter_2.name)
 
+    expect(page).to have_link("Delete Pet")
+    first(:link, 'Delete Pet').click
+    expect(current_path).to eq("/pets")
+
   end
 end
