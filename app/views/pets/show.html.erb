@@ -17,3 +17,7 @@
 <% end %>
 
 <%= link_to "Update Pet", {:controller => "pets", :action => "edit", :pet_id => @pet_id} %>
+
+<%= link_to "Delete Pet", "/pets/#{@pet_id}", method: :delete %>
+
+<%# <%= link_to "Delete Pet", {:controller => "pets", :action => "destroy", :pet_id => @pet_id} %> %>

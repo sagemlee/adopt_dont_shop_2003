@@ -21,6 +21,7 @@ RSpec.describe "Pet Delete", type: :feature do
                         sex: "F", shelter_id: shelter_1.id, status: false)
 
     visit "/pets/#{pet_2.id}"
+    expect(page).to have_link("Delete Pet")
     click_link("Delete Pet")
     expect(current_path).to eq("/pets")
 
