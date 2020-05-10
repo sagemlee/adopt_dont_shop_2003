@@ -1,3 +1,5 @@
+"Wish I could have done much more. I had a really hard time with it in the begninning."
+
 # Adopt Don't Shop
 BE Mod 2 Week 1 Solo Project
 
