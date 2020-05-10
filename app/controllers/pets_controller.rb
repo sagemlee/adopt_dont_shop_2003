@@ -34,7 +34,6 @@ class PetsController < ApplicationController
 
   def update
     @pet_id = params[:pet_id]
-    binding.pry
     pet = Pet.find(params[:pet_id])
     pet.update(pet_params)
     redirect_to "/pets/#{@pet_id}"
@@ -42,7 +41,6 @@ class PetsController < ApplicationController
 
   def destroy
     Pet.destroy(params[:pet_id])
-    binding.pry
     redirect_to '/pets'
   end
 

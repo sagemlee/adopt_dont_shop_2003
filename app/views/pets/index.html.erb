@@ -6,4 +6,6 @@
   <h2><%= pet.approximate_age %></h2>
   <h2><%= pet.sex %></h2>
   <h2><%= pet.shelter.name %></h2>
+  <%= link_to "Update Pet", {:controller => "pets", :action => "edit", :pet_id => pet.id} %>
+  <%= link_to "Delete Pet", "/pets/#{pet.id}", method: :delete %>
 <% end %>

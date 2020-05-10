@@ -31,6 +31,6 @@ RSpec.describe "Pet Index", type: :feature do
 
     expect(page).to have_link("Update Pet")
     first(:link, 'Update Pet').click
-    expect(current_path).to eq("/pet/#{pet_1.id}")
+    expect(current_path).to eq("/pets/#{pet_1.id}/edit")
   end
 end
