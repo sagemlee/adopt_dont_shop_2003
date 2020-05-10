@@ -3,10 +3,10 @@
 
 <h1>Fill in New Pet Info</h1>
 <%= form_tag "/shelters/#{@current_shelter_id}/pets", method: :post do %>
-<%= text_field_tag :image %>
-  <%= text_field_tag :name %>
-  <%= text_field_tag :approximate_age %>
-  <%= text_field_tag :sex %>
+<%= text_field_tag :image, "Image of pet" %>
+  <%= text_field_tag :name, "Name" %>
+  <%= text_field_tag :approximate_age, "Age" %>
+  <%= text_field_tag :sex, "sex" %>
   <% text_field :status, true %>
   <% text_field :shelter_id, @current_shelter_id %>
   <%= submit_tag "Create Pet" %>
