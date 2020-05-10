@@ -1,6 +1,6 @@
 <h1><%= @current_shelter.name %></h1>
-
 <% @pets.each do |pet| %>
+<%# <% binding.pry %> %>
 <% if "#{pet.shelter.id}" == @current_shelter_id %>
   <%= image_tag(pet.image) %>
   <h2><%= pet.name %></h2>
@@ -8,3 +8,6 @@
   <h2><%= pet.sex %></h2>
   <% end %>
 <% end %>
+
+<%# <%= link_to "Create Pet", "/shelters/:shelter_id/pets/new" %> %>
+<%= link_to "Create Pet", {:controller => "pets", :action => "new", :shelter_id => @current_shelter_id} %>
