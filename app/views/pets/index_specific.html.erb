@@ -6,6 +6,7 @@
   <h2><%= pet.name %></h2>
   <h2><%= pet.approximate_age %></h2>
   <h2><%= pet.sex %></h2>
+  <%= link_to "Delete Pet", "/pets/#{pet.id}", method: :delete %>
   <% end %>
 <% end %>
 
