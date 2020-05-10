@@ -7,7 +7,11 @@ RSpec.describe "shelters index page", type: :feature do
     shelter_2 = Shelter.create(name:'Very Good Shelter')
 
     visit "/shelters"
+
+    expect(page).to have_link("Pets Pets Pets")
     expect(page).to have_content(shelter_1.name)
+
+    expect(page).to have_link("Very Good Shelter")
     expect(page).to have_content(shelter_2.name)
     expect(page).to have_link("Update Shelter")
 
