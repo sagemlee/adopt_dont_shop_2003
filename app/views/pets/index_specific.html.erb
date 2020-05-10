@@ -1,14 +1,13 @@
 <h1><%= link_to "#{@current_shelter.name}","/shelters/#{@current_shelter_id}" %></h1>
 
 <% @pets.each do |pet| %>
-
-<% if "#{pet.shelter.id}" == @current_shelter_id %>
-  <%= image_tag(pet.image) %>
-  <h2><%= pet.name %></h2>
-  <h2><%= pet.approximate_age %></h2>
-  <h2><%= pet.sex %></h2>
-  <%= link_to "Delete Pet", "/pets/#{pet.id}", method: :delete %>
-  <% end %>
+  <% if "#{pet.shelter.id}" == @current_shelter_id %>
+    <%= image_tag(pet.image) %>
+    <h2><%= link_to "#{pet.name}","/pets/#{pet.id}" %></h2>
+    <h2><%= pet.approximate_age %></h2>
+    <h2><%= pet.sex %></h2>
+    <%= link_to "Delete Pet", "/pets/#{pet.id}", method: :delete %>
+   <% end %>
 <% end %>
 
 <%= link_to "Create Pet", {:controller => "pets", :action => "new", :shelter_id => @current_shelter_id} %>
