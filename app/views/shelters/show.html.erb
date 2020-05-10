@@ -1,7 +1,10 @@
   <h3><%= link_to "Click here to see all pets","/pets" %></h3>
   <h3><%= link_to "Click here to see all shelters","/shelters" %></h3>
 
+
+
   <h1><%= @shelter.name %></h1>
+  <h2><%= link_to "Click here to see all of this shelter's pets","/shelters/#{@shelter.id}/pets" %></h2>
   <h2><%= @shelter.address %></h2>
   <h2><%= @shelter.city %></h2>
   <h2><%= @shelter.state %></h2>
