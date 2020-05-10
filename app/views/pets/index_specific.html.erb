@@ -3,8 +3,10 @@
 
 <h1><%= link_to "#{@current_shelter.name}","/shelters/#{@current_shelter_id}" %></h1>
 
+<% pet_count = 0 %>
 <% @pets.each do |pet| %>
   <% if "#{pet.shelter.id}" == @current_shelter_id %>
+    <% pet_count =+1 %>
     <%= image_tag(pet.image) %>
     <h2><%= link_to "#{pet.name}","/pets/#{pet.id}" %></h2>
     <h2><%= pet.approximate_age %></h2>
@@ -14,3 +16,5 @@
 <% end %>
 
 <%= link_to "Create Pet", {:controller => "pets", :action => "new", :shelter_id => @current_shelter_id} %>
+
+<h3><%="Number of pets at this shelter: #{pet_count} "%></h3>
