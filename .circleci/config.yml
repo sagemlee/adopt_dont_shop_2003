@@ -23,7 +23,7 @@ references:
   check_bundler_verson: &check_bundler_verson
     run:
       name: Which bundler?
-      command: bundle -v
+      command: gem install bundler
 
   run_specs: &run_specs
     run:
