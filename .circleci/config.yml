@@ -1,18 +1,121 @@
 
 version: 2.1
-orbs:
-  ruby: circleci/ruby@0.1.2 
 
+orbs:
+  heroku: circleci/heroku@0.0.4
+
+references:
+  container_setup: &container_setup
+    docker: # run the steps with Docker
+      - image: circleci/ruby:2.6.0-rc1-node # ...with this image as the primary container; this is where all `steps` will run
+        environment: # environment variables for primary container
+          BUNDLE_JOBS: 3
+          BUNDLE_RETRY: 3
+          BUNDLE_PATH: vendor/bundle
+          PGHOST: 127.0.0.1
+          PGUSER: postgres
+          RAILS_ENV: test
+      - image: circleci/postgres:9.5-alpine # database image
+        environment: # environment variables for database
+          POSTGRES_USER: postgres
+          POSTGRES_DB:
+          POSTGRES_PASSWORD: ""
+  check_bundler_verson: &check_bundler_verson
+    run:
+      name: Which bundler?
+      command: bundle -v
+
+  run_specs: &run_specs
+    run:
+      name: Run rspec in parallel
+      command: |
+        bundle exec rspec --profile 10 \
+                          --format RspecJunitFormatter \
+                          --out test_results/rspec.xml \
+                          --format progress \
+                          $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
 jobs:
-  build:
-    docker:
-      - image: circleci/ruby:2.6.3-stretch-node
-      
-    executor: ruby/default
+  build: # runs not using Workflows must have a `build` job as entry point
+    <<: *container_setup
+    steps: # a collection of executable commands
+      - checkout
+      - *check_bundler_verson
+      - restore_cache:
+          keys:
+            - base-simulation-bundle-{{ checksum "Gemfile.lock" }}
+            - base-simulation-bundle
+
+      - run: # Install Ruby dependencies
+          name: Bundle Install
+          command: bundle check || bundle install
+      # Store bundle cache for Ruby dependencies
+      - save_cache:
+          key: base-simulation-bundle-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+      # Only necessary if app uses webpacker or yarn in some other way
+      - restore_cache:
+          keys:
+            - base-simulation-yarn-{{ checksum "yarn.lock" }}
+            - base-simulation-yarn
+      - run:
+          name: Yarn Install
+          command: yarn install --cache-folder ~/.cache/yarn
+      # Store yarn / webpacker cache
+      - save_cache:
+          key: base-simulation-yarn-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Database setup
+          command: bin/rails db:create db:schema:load --trace
+      - *run_specs
+      # Save test results for timing analysis
+      - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
+          path: test_results
+  staging-deploy:
+    <<: *container_setup
+    environment:
+      HEROKU_APP_NAME: base-simulation-staging
+    executor: heroku/default
     steps:
       - checkout
+      - heroku/install
+      - heroku/deploy-via-git
       - run:
-          name: Which bundler?
-          command: gem install bundler
-          #bundle -v
-      - ruby/bundle-install
+          name: Migrate db
+          command: heroku run rake db:migrate --app $HEROKU_APP_NAME
+  production-deploy:
+    <<: *container_setup
+    environment:
+      HEROKU_APP_NAME: base-simulation
+    executor: heroku/default
+    steps:
+      - checkout
+      - heroku/install
+      - heroku/deploy-via-git
+      - run:
+          name: Migrate db
+          command: heroku run rake db:migrate --app arcane-mesa-84633
+
+workflows:
+  version: 2.1
+  build-deploy:
+    jobs:
+      - build
+      - production-deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
+
+      - staging-deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: develop
